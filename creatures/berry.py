@@ -7,9 +7,11 @@ from .actions.interaction import Interaction
 
 # Create an empty list of Gnubs
 berries = []
+count_berries = 100
 
 class Berry(Creature):
     """A nutritious creature"""
+    global count_berries
 
     def __init__(self):
         '''Called when your creature is created.  Set up the creature here'''
@@ -21,6 +23,7 @@ class Berry(Creature):
         self.setImage('creatures/berry.png')
 
     def tick(self):
+        global count_berries
 
         if self.status=="asleep" and self.alertness < 100:
             # If we were asleep, keep sleeping until fully alert
@@ -30,8 +33,10 @@ class Berry(Creature):
             # If we are tired, go to sleep
             action = "sleep"        
 
-        elif randint(0,100)==0:
+        elif randint(0,100)==0 and count_berries<150:
             action = "divide"
+            count_berries += 1
+            print(count_berries)
         
         else:
             # Otherwise keep still
@@ -53,12 +58,18 @@ class Berry(Creature):
             self.say("*")
             return Interaction("eat")
 
+    def dying(self):
+        '''Called when the creature is dying'''
+        global count_berries
+
+        count_berries -= 1       
+
 
 def start():
     '''Called when the World starts.  Write your code to create the creatures here.'''
 
     # Create a bunch of berries
-    for i in range(100):
+    for i in range(count_berries):
         berries.append(Berry())
 
     # Return them to the world
