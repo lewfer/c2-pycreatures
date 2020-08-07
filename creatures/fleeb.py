@@ -23,37 +23,7 @@ class Fleeb(Creature):
     def tick(self):
         """Called on each tick of the World clock"""
 
-        # Update properties
-        #self.steering = 0        # steering in degrees, positive is left, negative is right
-        self.max_velocity = 5    # maximum speed of the creature in pixels per tick
-        self.acceleration = 2    # acceleration in pixels per tick per tick
-
-        # Take action if we reach the edge of the world
-        if self.position.x <= WORLD_LEFT+20:
-            self.angle = 0
-        elif self.position.x > WORLD_RIGHT-20:
-            self.angle = 180
-        elif self.position.y <= WORLD_TOP+20:
-            self.angle = 270
-        elif self.position.y >= WORLD_BOTTOM-20:
-            self.angle = 90       
-
-        # Tell the creature to sleep or move
-        if self.alertness < 10:
-            action = "sleep"
-        else:
-            action = "move"
-
-        return action
-
-
-    def interact(self, other_creature_data):
-        '''Interact with another creature'''
-
-        if other_creature_data.type=="Fleeb":
-            self.say = "hello"
-        else:
-            return Interaction("eat")
+        return "move"
 
 
 def start():
