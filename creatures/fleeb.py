@@ -20,12 +20,6 @@ class Fleeb(Creature):
         # Load the creature image
         self.setImage('creatures/fleeb.png')
 
-    def tick(self):
-        """Called on each tick of the World clock"""
-
-        return "move"
-
-
 def start():
     """Called when the World starts.  Write your code to create the creatures here."""
 

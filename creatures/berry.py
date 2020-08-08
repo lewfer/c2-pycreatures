@@ -36,7 +36,6 @@ class Berry(Creature):
         elif randint(0,100)==0 and count_berries<150:
             action = "divide"
             count_berries += 1
-            print(count_berries)
         
         else:
             # Otherwise keep still
