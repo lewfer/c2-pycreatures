@@ -41,7 +41,21 @@ class Korub(Creature):
         elif self.position.y >= WORLD_BOTTOM-20:
             self.angle = 90
 
-        return "move"
+        if self.status=="asleep" and self.alertness < 100:
+            # If we were asleep, keep sleeping until fully alert
+            self.say("Zzz")
+            action = "sleep"
+
+        elif self.alertness < 10:
+            # If we are tired, go to sleep
+            self.say("Zzz")
+            action = "sleep"
+
+        else:
+            # OK to move
+            action = "move"
+
+        return action
 
     def interact(self, other_creature_data):
         '''Interact with another creature'''
